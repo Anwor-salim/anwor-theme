@@ -1385,4 +1385,204 @@ salla-maintenance-alert,
   z-index: 10 !important;
 }
 
+/* ============================================================
+   SELIA-THEME SIGNATURE ANIMATIONS & COMPONENTS (PERFUME EDITION)
+   ============================================================ */
+
+/* 1. Continuous Smooth Marquee Tickers (LTR & RTL) */
+@keyframes marqueeScrollRTL {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes marqueeScrollLTR {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+[dir="rtl"] .marquee__group {
+  animation: marqueeScrollRTL 35s linear infinite;
+  display: flex;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+[dir="ltr"] .marquee__group {
+  animation: marqueeScrollLTR 35s linear infinite;
+  display: flex;
+  flex-shrink: 0;
+  will-change: transform;
+}
+
+.promotion-banner:hover .marquee__group,
+.animated-text:hover .marquee__group,
+.s-block--animated-brands:hover .marquee__group {
+  animation-play-state: paused;
+}
+
+/* Faster ticker for brand logos */
+.s-block--animated-brands .marquee__group {
+  animation-duration: 25s !important;
+}
+
+/* 2. Selia Circular Perfume Category Avatars */
+.selia-perfume-categories {
+  .category-circle-item {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:hover {
+      transform: translateY(-4px);
+
+      .w-full.h-full {
+        border-color: #cca36e !important;
+      }
+    }
+  }
+}
+
+/* 3. Selia Brand Pills */
+.s-block--animated-brands {
+  .brand-pill {
+    transition: all 0.25s ease;
+    letter-spacing: 0.05em;
+
+    &:hover {
+      border-color: #cca36e !important;
+      background: #cca36e !important;
+      color: #121316 !important;
+      transform: scale(1.04);
+
+      i {
+        color: #121316 !important;
+      }
+    }
+  }
+}
+
+/* 4. Mobile Sticky Bottom Navigation */
+.mobile-bottom-nav {
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+
+  a {
+    transition: all 0.2s ease;
+
+    &:hover, &:focus {
+      color: #cca36e !important;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* 5. Floating WhatsApp Button */
+.floating-whatsapp-btn {
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
+
+  &:hover {
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55);
+  }
+}
+
+/* 6. Dark Mode Styles Matching Selia Haute Parfumerie */
+html.dark {
+  body {
+    background-color: #0f1012 !important;
+    color: #faf7f2 !important;
+  }
+
+  /* Product Cards in Dark Mode */
+  .s-product-card-entry {
+    background: #18191d !important;
+    border-color: rgba(204, 163, 110, 0.2) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+
+    &:hover {
+      border-color: #cca36e !important;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55) !important;
+    }
+
+    .s-product-card-image {
+      background: #131417 !important;
+    }
+
+    .s-product-card-content {
+      background: #18191d !important;
+    }
+
+    .s-product-card-content-title a {
+      color: #faf7f2 !important;
+
+      &:hover {
+        color: #cca36e !important;
+      }
+    }
+
+    .s-product-card-content-subtitle {
+      color: #a8a49d !important;
+    }
+  }
+
+  /* Fragrance Families in Dark Mode */
+  .perfume-family-box {
+    background: #18191d !important;
+    border-color: rgba(204, 163, 110, 0.22) !important;
+
+    .family-box-title {
+      color: #faf7f2 !important;
+    }
+
+    &:hover {
+      background: #202227 !important;
+      border-color: #cca36e !important;
+    }
+  }
+
+  /* Store Features in Dark Mode */
+  .s-block--features .s-block--features__item {
+    background: #18191d !important;
+    border-color: rgba(204, 163, 110, 0.2) !important;
+
+    h2 {
+      color: #faf7f2 !important;
+    }
+
+    p {
+      color: #a8a49d !important;
+    }
+
+    .feature-icon {
+      background: #131417 !important;
+      border-color: rgba(204, 163, 110, 0.3) !important;
+    }
+  }
+
+  /* Section Titles in Dark Mode */
+  .s-block__title h2,
+  .selia-perfume-categories h2 {
+    color: #faf7f2 !important;
+  }
+
+  .category-circle-item span {
+    color: #faf7f2 !important;
+  }
+
+  /* Single Product Details */
+  .container--product-details {
+    .details-slider,
+    .fragrance-notes-card {
+      background: #18191d !important;
+      border-color: rgba(204, 163, 110, 0.2) !important;
+    }
+
+    h1[data-testid="store-product-title"],
+    .notes-title {
+      color: #faf7f2 !important;
+    }
+
+    .notes-tier .tier-content {
+      color: #d1cdc7 !important;
+    }
+  }
+}
+
+
 

@@ -1,120 +1,169 @@
 {#
-| Variable         | Type    | Description                     |
-|------------------|---------|---------------------------------|
-| cart             | object  |                                 |
-| cart.items_count | int     |                                 |
-| cart.total       | string  | Formatted total ex: "١٠٠ ر.س"   |
+  Selia-inspired Luxury Fragrance Store Header
+  الهيدر الفاخر لمتجر العطور بستايل ثيم سيليا مع شريط الإعلانات المتحرك، الشعار في المنتصف، وأزرار التحكم
 #}
 {% set important_links = theme.settings.get('important_links') %}
 <header data-testid="store-header" class="store-header sticky top-0 z-50 transition-all duration-300">
-  {# Luxury Fragrance Announcement Bar #}
+  
+  {# 1. Selia Marquee Promotion Bar (الشريط الإعلاني المتحرك مثل ثيم سيليا) #}
   {% if theme.settings.get('show_top_ribbon', true) %}
-  <div class="perfume-top-ribbon bg-[#d4b07c] text-[#121316] text-xs py-1.5 px-4 shadow-sm border-b border-[#cca36e]/40">
-    <div class="container flex items-center justify-between text-xs font-semibold">
-      <div class="flex items-center gap-2 text-[#121316]/80">
-        <button type="button" class="hover:opacity-70 transition-opacity flex items-center" aria-label="السابق"><i class="sicon-keyboard_arrow_right text-xs"></i></button>
-        <button type="button" class="hover:opacity-70 transition-opacity flex items-center" aria-label="التالي"><i class="sicon-keyboard_arrow_left text-xs"></i></button>
-      </div>
-      <div class="flex-1 text-center font-bold tracking-wide">
-        <span class="inline-flex items-center gap-1.5">
-          <span>عطور مختارة بعناية لأجمل لحظاتك</span>
+  <div class="promotion-banner bg-[#121316] border-b border-[#cca36e]/30 text-[#faf7f2] relative overflow-hidden py-2" id="headerPromotionBanner">
+    <div class="promotion-banner__inner flex whitespace-nowrap overflow-hidden">
+      <div class="marquee__group flex items-center shrink-0">
+        <span class="inline-flex items-center gap-2 mx-6 text-xs font-bold text-[#faf7f2]">
+          <i class="sicon-sparkle text-[#cca36e]"></i>
+          <span>خصم خاص لفترة محدودة على أفخم العطور الملكية ✨ استخدم كود: <b>ROYAL10</b></span>
         </span>
+        <span class="text-[#cca36e]/40">|</span>
+        <span class="inline-flex items-center gap-2 mx-6 text-xs font-bold text-[#faf7f2]">
+          <i class="sicon-delivery-truck text-[#cca36e]"></i>
+          <span>شحن مجاني وسريع لكافة مناطق المملكة للطلبات فوق 300 ريال 🚚</span>
+        </span>
+        <span class="text-[#cca36e]/40">|</span>
+        <span class="inline-flex items-center gap-2 mx-6 text-xs font-bold text-[#faf7f2]">
+          <i class="sicon-shield-check text-[#cca36e]"></i>
+          <span>الضمان الذهبي الملكي: استرجاع واستبدال فوري بكل سهولة 💎</span>
+        </span>
+        <span class="text-[#cca36e]/40">|</span>
+        <span class="inline-flex items-center gap-2 mx-6 text-xs font-bold text-[#faf7f2]">
+          <i class="sicon-gift text-[#cca36e]"></i>
+          <span>عينات تجربة مجانية فاخرة مع كل طلب للتجربة 👑</span>
+        </span>
+        <span class="text-[#cca36e]/40">|</span>
       </div>
-      <div class="hidden sm:flex items-center gap-1.5 font-bold text-xs text-[#121316]">
-        <i class="sicon-delivery-truck text-sm"></i>
-        <span>شحن مجاني للطلبات فوق 500 ريال</span>
+
+      {# Duplicate group for smooth infinite loop #}
+      <div aria-hidden="true" class="marquee__group flex items-center shrink-0">
+        <span class="inline-flex items-center gap-2 mx-6 text-xs font-bold text-[#faf7f2]">
+          <i class="sicon-sparkle text-[#cca36e]"></i>
+          <span>خصم خاص لفترة محدودة على أفخم العطور الملكية ✨ استخدم كود: <b>ROYAL10</b></span>
+        </span>
+        <span class="text-[#cca36e]/40">|</span>
+        <span class="inline-flex items-center gap-2 mx-6 text-xs font-bold text-[#faf7f2]">
+          <i class="sicon-delivery-truck text-[#cca36e]"></i>
+          <span>شحن مجاني وسريع لكافة مناطق المملكة للطلبات فوق 300 ريال 🚚</span>
+        </span>
+        <span class="text-[#cca36e]/40">|</span>
+        <span class="inline-flex items-center gap-2 mx-6 text-xs font-bold text-[#faf7f2]">
+          <i class="sicon-shield-check text-[#cca36e]"></i>
+          <span>الضمان الذهبي الملكي: استرجاع واستبدال فوري بكل سهولة 💎</span>
+        </span>
+        <span class="text-[#cca36e]/40">|</span>
+        <span class="inline-flex items-center gap-2 mx-6 text-xs font-bold text-[#faf7f2]">
+          <i class="sicon-gift text-[#cca36e]"></i>
+          <span>عينات تجربة مجانية فاخرة مع كل طلب للتجربة 👑</span>
+        </span>
+        <span class="text-[#cca36e]/40">|</span>
       </div>
     </div>
+    <button type="button" onclick="document.getElementById('headerPromotionBanner').style.display='none'" class="absolute end-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-xs px-1" aria-label="إغلاق الإعلان">
+      <i class="sicon-cancel"></i>
+    </button>
   </div>
   {% endif %}
 
-  {# Bullet Delivery tag — mobile #}
-  <div class="lg:hidden">
-    <salla-bullet-delivery-tag></salla-bullet-delivery-tag>
-  </div>
-
-  {# Top Nav #}
-  <div class="top-navbar">
+  {# 2. Top Navigation Bar (الشريط العلوي الأنيق للروابط واللغات) #}
+  <div class="top-navbar bg-[#0e0f11] text-[#cfcbc4] text-xs py-1.5 border-b border-[#cca36e]/15 hidden md:block">
     <div class="container flex justify-between items-center">
-      <div class="flex-1 flex items-center gap-3">
-          {# Footer / Header Extra Menu #}
-          {% if important_links %}
-            <salla-menu data-testid="store-header-topnav" source="footer" topnav></salla-menu>
-          {% endif %}
-
-          {# Language & Currency Component #}
-          <div class="header-buttons">
-              {% if store.settings.is_multilingual or store.settings.currencies_enabled %}
-                  <salla-localization-modal data-testid="store-header-localization" show-trigger></salla-localization-modal>
-              {% endif %}
-          </div>
-
-          {# Bullet Delivery tag — desktop #}
-          <div class="hidden lg:block">
-            <salla-bullet-delivery-tag></salla-bullet-delivery-tag>
-          </div>
-
-          {# Scopes | Branches #}
-          {% if store.scope %}
-              <button class="btn--rounded-gray text-xs"
-                      onclick="salla.event.dispatch('scopes::open', {'mode': 'default'})">
-                  <i class="sicon-location rtl:ml-1 ltr:mr-1 text-[#c5a880]"></i> {{ store.scope.name }}
-              </button>
-          {% endif %}
-
-          {# Search bar #}
-          <div class="header-search flex-1 max-w-md">
-            <salla-search data-testid="store-header-search" inline oval height="40" placeholder="ابحث عن عطر، ماركة، أو مكونات..."></salla-search>
-          </div>
+      {# Right in RTL: Secondary Links #}
+      <div class="flex items-center gap-4">
+        <a href="/blog" class="hover:text-[#cca36e] transition-colors">المدونة العطرية</a>
+        <span class="text-[#cca36e]/30">•</span>
+        <a href="/p/privacy" class="hover:text-[#cca36e] transition-colors">الضمان الذهبي والخصوصية</a>
+        <span class="text-[#cca36e]/30">•</span>
+        <a href="/orders" class="hover:text-[#cca36e] transition-colors">تتبع شحنتك</a>
       </div>
 
-      <salla-contacts data-testid="store-header-contacts" is-header></salla-contacts>
+      {# Left in RTL: Language, Currency & Delivery Info #}
+      <div class="flex items-center gap-4">
+        {# Language & Currency #}
+        {% if store.settings.is_multilingual or store.settings.currencies_enabled %}
+          <button type="button" onclick="salla.event.dispatch('localization::open')" class="flex items-center gap-1 hover:text-[#cca36e] transition-colors" aria-label="اللغة والعملة">
+            <i class="sicon-earth text-xs"></i>
+            <span>العربية (SAR)</span>
+            <i class="sicon-keyboard_arrow_down text-[10px]"></i>
+          </button>
+        {% endif %}
+
+        <salla-contacts data-testid="store-header-contacts" is-header></salla-contacts>
+      </div>
     </div>
   </div>
 
-  {# Main Navigation Header Bar #}
-  <div id="mainnav" class="main-nav-container shadow-default bg-[#141518] flex items-center">
-      <div class="inner bg-inherit w-full">
-          <div class="container">
-              <div class="flex items-center justify-between relative py-2.5 lg:py-1">
-                  {# Start / Right in RTL: Logo & Navigation #}
-                  <div class="flex items-center gap-3 lg:gap-8">
-                      <a data-testid="store-header-mobile-toggle" class="lg:hidden mburger mburger--collapse leading-none rtl:ml-2 ltr:mr-2" href="#mobile-menu" aria-label="Open-menu">
-                        <i class="sicon-menu text-[#faf7f2] text-2xl"></i>
-                      </a>
-                      <a data-testid="store-header-logo" class="navbar-brand flex items-center" href="{{ store.url }}">
-                          <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ ('images/anwor-royal-logo.svg'|asset) }}" alt="ANWOR SCENTS OF LUXURY" class="max-h-12 w-auto object-contain">
-                          {% if is_page('index') %}
-                            <h1 class="sr-only">{{ store.name }}</h1>
-                          {% else %}
-                            <h2 class="sr-only">{{ store.name }}</h2>
-                          {% endif %}
-                      </a>
-                      <custom-main-menu></custom-main-menu>
-                  </div>
+  {# 3. Main Navigation Bar with Centered Logo (الهيدر الرئيسي وشعار المتجر بالمنتصف) #}
+  <div id="mainnav" class="main-nav-container bg-[#141518] border-b border-[#cca36e]/20 shadow-md">
+    <div class="inner w-full py-2 sm:py-3">
+      <div class="container">
+        <div class="flex items-center justify-between relative">
+          
+          {# Right Side in RTL: Mobile Menu Toggle, Search, Dark/Light Mode Switcher #}
+          <div class="flex items-center gap-2 sm:gap-3 w-1/3 justify-start">
+            {# Mobile Menu Toggle #}
+            <a data-testid="store-header-mobile-toggle" class="lg:hidden mburger mburger--collapse leading-none flex items-center justify-center w-9 h-9 rounded-full border border-[#cca36e]/30 text-[#faf7f2] hover:bg-[#cca36e] hover:text-[#121316] transition-all" href="#mobile-menu" aria-label="Open-menu">
+              <i class="sicon-menu text-xl"></i>
+            </a>
 
-                  {# End / Left in RTL: Search, Wishlist, Account, Cart #}
-                  <div class="flex items-center justify-end gap-2 sm:gap-3 my-1">
-                      {# Search Trigger #}
-                      <button type="button" onclick="salla.event.dispatch('search::open')" class="flex items-center justify-center w-9 h-9 rounded-full border border-[#c5a880]/30 text-[#faf7f2] hover:bg-[#cca36e] hover:text-[#121316] hover:border-[#cca36e] transition-all" aria-label="بحث عن عطور">
-                        <i class="sicon-search text-base"></i>
-                      </button>
+            {# Search Trigger Button #}
+            <button type="button" onclick="salla.event.dispatch('search::open')" class="flex items-center justify-center w-9 h-9 rounded-full border border-[#cca36e]/30 text-[#faf7f2] hover:bg-[#cca36e] hover:text-[#121316] transition-all" aria-label="بحث عن عطور" title="بحث">
+              <i class="sicon-search text-base"></i>
+            </button>
 
-                      {# Wishlist Link #}
-                      <a href="{{ link('customer.wishlist') }}" class="hidden sm:flex items-center justify-center w-9 h-9 rounded-full border border-[#c5a880]/30 text-[#faf7f2] hover:bg-[#cca36e] hover:text-[#121316] hover:border-[#cca36e] transition-all" aria-label="{{ trans('blocks.header.wishlist') }}" title="{{ trans('blocks.header.wishlist') }}">
-                        <i class="sicon-heart text-base"></i>
-                      </a>
-
-                      {# User Menu #}
-                      <salla-user-menu data-testid="store-header-user-menu" show-header show-trigger></salla-user-menu>
-
-                      {# Cart Summary #}
-                      <salla-cart-summary data-testid="store-header-cart">
-                        <i slot="icon" class="header-btn__icon icon sicon-shopping-bag text-lg"></i>
-                      </salla-cart-summary>
-                  </div>
-              </div>
+            {# Dark / Light Mode Switcher (Selia sun & moon) #}
+            <button type="button" class="theme-toggle flex items-center justify-center w-9 h-9 rounded-full border border-[#cca36e]/30 text-[#faf7f2] hover:bg-[#cca36e] hover:text-[#121316] transition-all" onclick="toggleDarkMode()" title="تبديل الوضع الليلي / الفاتح" aria-label="Toggle Theme">
+              <i class="sicon-moon text-base dark:hidden"></i>
+              <i class="sicon-sun text-base hidden dark:inline"></i>
+            </button>
           </div>
+
+          {# Center: Centered Luxury Logo (شعار أنور للعطور الملكية بالمنتصف) #}
+          <div class="flex items-center justify-center flex-col w-1/3 text-center">
+            <a data-testid="store-header-logo" class="navbar-brand inline-flex items-center justify-center" href="{{ store.url }}">
+              <img fetchpriority="high" width="100%" height="100%" loading="eager" src="{{ ('images/anwor-royal-logo.svg'|asset) }}" alt="ANWOR SCENTS OF LUXURY" class="max-h-12 sm:max-h-14 w-auto object-contain">
+              {% if is_page('index') %}
+                <h1 class="sr-only">{{ store.name }}</h1>
+              {% else %}
+                <h2 class="sr-only">{{ store.name }}</h2>
+              {% endif %}
+            </a>
+          </div>
+
+          {# Left Side in RTL: User Menu, Wishlist, Cart Summary #}
+          <div class="flex items-center justify-end gap-2 sm:gap-3 w-1/3">
+            {# Wishlist Link #}
+            <a href="{{ link('customer.wishlist') }}" class="hidden sm:flex items-center justify-center w-9 h-9 rounded-full border border-[#cca36e]/30 text-[#faf7f2] hover:bg-[#cca36e] hover:text-[#121316] transition-all" aria-label="قائمة الرغبات" title="المفضلة">
+              <i class="sicon-heart text-base"></i>
+            </a>
+
+            {# User Menu / Account #}
+            <salla-user-menu data-testid="store-header-user-menu" show-header show-trigger></salla-user-menu>
+
+            {# Cart Drawer Summary with count badge #}
+            <salla-cart-summary data-testid="store-header-cart" class="header__cart-summary">
+              <i slot="icon" class="header-btn__icon icon sicon-shopping-bag text-lg"></i>
+            </salla-cart-summary>
+          </div>
+
+        </div>
       </div>
+    </div>
+
+    {# 4. Main Menu Row Underneath (شريط تصنيفات العطور الملكية الرئيسي) #}
+    <div class="main-menu-row border-t border-[#cca36e]/15 bg-[#121316]/95 hidden lg:block">
+      <div class="container">
+        <nav class="flex items-center justify-center py-1">
+          <ul class="main-menu flex items-center justify-center gap-1 sm:gap-2">
+            <li><a href="/" class="hover:text-[#cca36e] transition-colors text-sm font-semibold px-3 py-2">الرئيسية</a></li>
+            <li><a href="/search?q={{ 'عطور رجالية'|url_encode }}" class="hover:text-[#cca36e] transition-colors text-sm font-semibold px-3 py-2">عطور رجالية</a></li>
+            <li><a href="/search?q={{ 'عطور نسائية'|url_encode }}" class="hover:text-[#cca36e] transition-colors text-sm font-semibold px-3 py-2">عطور نسائية</a></li>
+            <li><a href="/search?q={{ 'نيش وعود'|url_encode }}" class="hover:text-[#cca36e] transition-colors text-sm font-semibold px-3 py-2">نيش وعود ملكي</a></li>
+            <li><a href="/search?q={{ 'بكجات هدايا'|url_encode }}" class="hover:text-[#cca36e] transition-colors text-sm font-semibold px-3 py-2">أطقم وبكجات هدايا</a></li>
+            <li><a href="/search?q={{ 'مسك وعنبر'|url_encode }}" class="hover:text-[#cca36e] transition-colors text-sm font-semibold px-3 py-2">مسك وعنبر</a></li>
+            <li><a href="/search?q={{ 'عطور شعر'|url_encode }}" class="hover:text-[#cca36e] transition-colors text-sm font-semibold px-3 py-2">عطور الشعر والجسم</a></li>
+            <li><a href="/search?q={{ 'بخور'|url_encode }}" class="hover:text-[#cca36e] transition-colors text-sm font-semibold px-3 py-2">بخور ومعطرات</a></li>
+            <li><a href="/offers" class="text-[#cca36e] hover:text-[#dfcaa7] transition-colors text-sm font-bold px-3 py-2 flex items-center gap-1"><i class="sicon-sparkle"></i> العروض الملكية</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   </div>
 </header>
